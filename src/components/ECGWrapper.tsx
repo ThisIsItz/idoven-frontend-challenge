@@ -22,5 +22,15 @@ export default function ECG() {
       </div>
     )
   }
-  return <Loader text={'Please wait, we are loading your data'} />
+
+  return (
+    <Box
+      position="absolute"
+      top="50%"
+      left="50%"
+      sx={{ transform: 'translate(-50%, -50%)' }}
+    >
+      <Loader text="Please wait, we are loading your data..." />
+    </Box>
+  )
 }
