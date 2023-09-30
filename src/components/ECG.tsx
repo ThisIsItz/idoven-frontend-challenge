@@ -1,6 +1,8 @@
+import { Box, Button } from '@mui/material'
 import { useDataContext } from '../DataContext'
 import ECGChart from './ECGChart'
 import Loader from './Loader'
+import StyledButton from './StyledButton'
 
 export default function ECG() {
   const { data, currentPage, handlePrevPage, handleNextPage } = useDataContext()
@@ -11,10 +13,12 @@ export default function ECG() {
         <div>
           <ECGChart data={data} />
         </div>
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>
-          Move left
-        </button>
-        <button onClick={handleNextPage}>Move right</button>
+        <Box sx={{ mt: '2px', mr: '4px', float: 'right' }}>
+          <StyledButton onClick={handlePrevPage} disabled={currentPage === 1}>
+            Move left
+          </StyledButton>
+          <StyledButton onClick={handleNextPage}>Move right</StyledButton>
+        </Box>
       </div>
     )
   }

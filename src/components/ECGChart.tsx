@@ -2,6 +2,7 @@ import { Chart } from 'chart.js/auto'
 import { useEffect, useRef } from 'react'
 import { COLORS } from '../utils/colors'
 import { Box, Button } from '@mui/material'
+import StyledButton from './StyledButton'
 
 export default function ECGChart({ data }) {
   const canvasRef = useRef()
@@ -50,7 +51,8 @@ export default function ECGChart({ data }) {
           zoom: {
             zoom: {
               wheel: {
-                enabled: true
+                enabled: true,
+                speed: 0.1
               },
               pinch: {
                 enabled: true
@@ -76,17 +78,13 @@ export default function ECGChart({ data }) {
   }
 
   return (
-    <>
+    <Box display="inline">
       <Box>
         <canvas ref={canvasRef} width={900} height={500} />
       </Box>
-      <Button
-        variant="outlined"
-        sx={{ color: COLORS.blue, border: `1px solid ${COLORS.blue}` }}
-        onClick={handleResetZoom}
-      >
+      <StyledButton sx={{ color: 'yellow' }} onClick={handleResetZoom}>
         Reset Zoom
-      </Button>
-    </>
+      </StyledButton>
+    </Box>
   )
 }
