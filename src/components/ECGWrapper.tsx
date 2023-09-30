@@ -22,5 +22,5 @@ export default function ECG() {
       </div>
     )
   }
-  return <Loader />
+  return <Loader text={'Please wait, we are loading your data'} />
 }
