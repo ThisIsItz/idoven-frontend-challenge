@@ -1,14 +1,14 @@
 import './App.css'
 import Header from './components/Header'
 import ECG from './components/ECG'
+import { Box } from '@mui/material'
 
 function App() {
-
   return (
-    <>
-        <Header />
-        <ECG />
-    </>
+    <Box sx={{ h: 'auto' }}>
+      <Header />
+      <ECG />
+    </Box>
   )
 }
 
