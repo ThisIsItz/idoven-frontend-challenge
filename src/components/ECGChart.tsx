@@ -1,9 +1,11 @@
 import { Chart } from 'chart.js/auto'
 import { useEffect, useRef } from 'react'
 import { COLORS } from '../utils/colors'
+import { Box, Button } from '@mui/material'
 
 export default function ECGChart({ data }) {
   const canvasRef = useRef()
+  const chartRef = useRef()
 
   useEffect(() => {
     const trimmedData = data.slice(1)
@@ -60,10 +62,31 @@ export default function ECGChart({ data }) {
       }
     })
 
+    chartRef.current = chart
+
     return () => {
       chart.destroy()
     }
   }, [data])
 
-  return <canvas ref={canvasRef} width={1000} height={600} />
+  const handleResetZoom = () => {
+    if (chartRef.current) {
+      chartRef.current.resetZoom()
+    }
+  }
+
+  return (
+    <>
+      <Box>
+        <canvas ref={canvasRef} width={900} height={500} />
+      </Box>
+      <Button
+        variant="outlined"
+        sx={{ color: COLORS.blue, border: `1px solid ${COLORS.blue}` }}
+        onClick={handleResetZoom}
+      >
+        Reset Zoom
+      </Button>
+    </>
+  )
 }
