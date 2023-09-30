@@ -1,26 +1,31 @@
+import { Chart } from 'chart.js/auto';
 import { useDataContext } from '../DataContext';
+import ECGChart from './ECGChart';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export default function ECG(){
     const { data, currentPage, handlePrevPage, handleNextPage } = useDataContext();
 
     console.log('data', data)
-    if(data){
+
+
+
+    if(data.length > 1){
         return (
             <div>
-                 <ul>
-              {data.map((item, index) => (
-                <li key={index}>
-                  Column 1: {item.time}, Column 2: {item.value}
-                </li>
-              ))}
-            </ul>
+              <div>
+  <ECGChart data={data}/>
+</div>
             <button onClick={handlePrevPage} disabled={currentPage === 1}>
-              Previous Page
+              Move left
             </button>
-            <button onClick={handleNextPage}>Next Page</button>
+            <button onClick={handleNextPage}>Move right</button>
           </div>
           );
     }
- 
+    return  <Box sx={{ display: 'flex' }}>
+    <CircularProgress />
+  </Box>
   }
 
