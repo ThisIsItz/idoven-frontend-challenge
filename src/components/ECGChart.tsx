@@ -44,6 +44,17 @@ export default function ECGChart({ data }) {
         plugins: {
           legend: {
             display: false // Hide the legend
+          },
+          zoom: {
+            zoom: {
+              wheel: {
+                enabled: true
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: 'xy'
+            }
           }
         }
       }
