@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react'
 import { Chart } from 'chart.js/auto'
+import { useEffect, useRef } from 'react'
+import { COLORS } from '../utils/colors'
 
 export default function ECGChart({ data }) {
   const canvasRef = useRef()
@@ -20,7 +21,7 @@ export default function ECGChart({ data }) {
           {
             label: 'ECG Data',
             data: valueValues,
-            borderColor: 'blue',
+            borderColor: COLORS.blue,
             borderWidth: 1,
             fill: false,
             pointRadius: 0
