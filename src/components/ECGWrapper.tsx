@@ -1,15 +1,19 @@
 import { Box } from '@mui/material'
-import { useDataContext } from '../DataContext'
+import { COLORS } from '../utils/colors'
+import { DataContextProps } from '../utils/types'
 import ECGChart from './ECGChart'
+import InfoTooltip from './InfoTooltip'
 import Loader from './Loader'
 import StyledButton from './StyledButton'
-import InfoTooltip from './InfoTooltip'
-import { COLORS } from '../utils/colors'
+import { useDataContext } from '../hooks/useDataContext'
 
-export default function ECG() {
-  const { data, currentPage, handlePrevPage, handleNextPage } = useDataContext()
+export default function ECGWrapper() {
+  const { data, currentPage, handlePrevPage, handleNextPage } =
+    useDataContext() as DataContextProps
 
-  if (data.length > 1) {
+  const isDataAvailable = data.length > 1
+
+  if (isDataAvailable) {
     return (
       <Box>
         <Box
@@ -27,7 +31,7 @@ export default function ECG() {
           <ECGChart data={data} />
         </Box>
         <Box sx={{ mt: '2px', mr: '4px', float: 'right' }}>
-          <StyledButton onClick={handlePrevPage} disabled={true}>
+          <StyledButton onClick={handlePrevPage} disabled={currentPage === 1}>
             Move left
           </StyledButton>
           <StyledButton onClick={handleNextPage}>Move right</StyledButton>
@@ -35,7 +39,6 @@ export default function ECG() {
       </Box>
     )
   }
-
   return (
     <Box
       position="absolute"
