@@ -6,7 +6,7 @@ import { DataProvider } from './DataContext.tsx'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <DataProvider>
-    <App />
+      <App />
     </DataProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

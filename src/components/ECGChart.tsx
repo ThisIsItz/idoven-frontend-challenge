@@ -2,29 +2,34 @@ import { Box } from '@mui/material'
 import { Chart } from 'chart.js/auto'
 import { useEffect, useRef } from 'react'
 import { COLORS } from '../utils/colors'
-import { dataProps } from '../utils/types'
+import { DataProps } from '../utils/types'
 import StyledButton from './StyledButton'
 
-export default function ECGChart({ data }: { data: dataProps[] }) {
-  const canvasRef = useRef()
-  const chartRef = useRef()
+interface ECGChartProps {
+  data: DataProps[]
+}
+
+export default function ECGChart({ data }: ECGChartProps) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const chartRef = useRef<Chart | null>(null)
 
   useEffect(() => {
-    const trimmedData = data.slice(1)
-
-    const timeValues = trimmedData.map((d) => parseFloat(d.time))
-    const valueValues = trimmedData.map((d) => parseFloat(d.value))
-
+    if (!canvasRef.current) return
     const ctx = canvasRef.current.getContext('2d')
+    if (!ctx) return
 
-    const chart = new Chart(ctx, {
+    const trimmedData = data.slice(1)
+    const timeValues = trimmedData.map((d) => parseFloat(d.time))
+    const ecgValues = trimmedData.map((d) => parseFloat(d.value))
+
+    const chartConfig = {
       type: 'line',
       data: {
         labels: timeValues,
         datasets: [
           {
             label: 'ECG Data',
-            data: valueValues,
+            data: ecgValues,
             borderColor: COLORS.blue,
             borderWidth: 1,
             fill: false,
@@ -63,17 +68,20 @@ export default function ECGChart({ data }: { data: dataProps[] }) {
             pan: {
               enabled: true,
               mode: 'xy',
-              threshold: 100
+              threshold: 10
             }
           }
         }
       }
-    })
+    }
 
+    const chart = new Chart(ctx, chartConfig)
     chartRef.current = chart
 
     return () => {
-      chart.destroy()
+      if (chartRef.current) {
+        chartRef.current.destroy()
+      }
     }
   }, [data])
 

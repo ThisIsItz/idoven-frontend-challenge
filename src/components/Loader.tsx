@@ -1,7 +1,11 @@
 import { Box, CircularProgress } from '@mui/material'
 import { COLORS } from '../utils/colors'
 
-export default function Loader({ text }: { text?: string }) {
+interface LoaderProps {
+  text?: string
+}
+
+export default function Loader({ text }: LoaderProps) {
   return (
     <Box sx={{ display: 'block', justifyContent: 'center', my: 'auto' }}>
       <CircularProgress sx={{ color: COLORS.blue }} />

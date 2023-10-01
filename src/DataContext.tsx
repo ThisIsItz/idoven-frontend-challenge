@@ -1,15 +1,24 @@
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import JSZip from 'jszip'
-import { createContext, useContext, useEffect, useState } from 'react'
-import { dataProps } from './utils/types'
+import { DataContextProps, DataProps } from './utils/types'
 
-const DataContext = createContext({})
+const DataContext = createContext<DataContextProps | undefined>(undefined)
 
-export const useDataContext = () => useContext(DataContext)
+export const useDataContext = (): DataContextProps => {
+  const context = useContext(DataContext)
+  if (!context) {
+    throw new Error('useDataContext must be used within a DataProvider')
+  }
+  return context
+}
 
-export const DataProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<dataProps[] | []>([])
+export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
+  children
+}) => {
+  const [data, setData] = useState<DataProps[]>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [itemsPerPage] = useState<number>(30000)
+
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1)
   }
@@ -28,7 +37,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
         await zip.loadAsync(blob)
 
         let found = false
-        let txtFile
+        let txtFile: JSZip.JSZipObject | undefined
 
         zip.forEach((relativePath, zipEntry) => {
           if (!found && zipEntry.name.endsWith('.txt')) {
@@ -45,18 +54,23 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
 
           const reader = contentStream.getReader()
 
-          while (true) {
-            const { done, value } = await reader.read()
-            if (done) break
+          let done = false
 
-            content += new TextDecoder().decode(value)
+          while (!done) {
+            const { done: isDone, value } = await reader.read()
 
-            if (content.includes('\n')) {
-              const lines = content.split('\n')
-              lineCount += lines.length - 1
+            if (isDone) {
+              done = true
+            } else {
+              content += new TextDecoder().decode(value)
 
-              if (lineCount >= currentPage * itemsPerPage) {
-                break
+              if (content.includes('\n')) {
+                const lines = content.split('\n')
+                lineCount += lines.length - 1
+
+                if (lineCount >= currentPage * itemsPerPage) {
+                  done = true
+                }
               }
             }
           }
@@ -81,18 +95,15 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     fetchData()
   }, [currentPage, itemsPerPage])
 
+  const contextValue: DataContextProps = {
+    data,
+    currentPage,
+    itemsPerPage,
+    handleNextPage,
+    handlePrevPage
+  }
+
   return (
-    <DataContext.Provider
-      value={{
-        data,
-        setData,
-        currentPage,
-        itemsPerPage,
-        handleNextPage,
-        handlePrevPage
-      }}
-    >
-      {children}
-    </DataContext.Provider>
+    <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
   )
 }
