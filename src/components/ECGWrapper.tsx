@@ -5,7 +5,7 @@ import ECGChart from './ECGChart'
 import InfoTooltip from './InfoTooltip'
 import Loader from './Loader'
 import StyledButton from './StyledButton'
-import { useDataContext } from '../hooks/useDataContext'
+import { useDataContext } from '../contexts/useDataContext'
 
 export default function ECGWrapper() {
   const { data, currentPage, handlePrevPage, handleNextPage } =
