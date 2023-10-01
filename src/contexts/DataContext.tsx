@@ -1,16 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
 import JSZip from 'jszip'
-import { DataContextProps, DataProps } from './utils/types'
+import React, { createContext, useEffect, useState } from 'react'
+import { DataContextProps, DataProps } from '../utils/types'
 
-const DataContext = createContext<DataContextProps | undefined>(undefined)
-
-export const useDataContext = (): DataContextProps => {
-  const context = useContext(DataContext)
-  if (!context) {
-    throw new Error('useDataContext must be used within a DataProvider')
-  }
-  return context
-}
+export const DataContext = createContext<DataContextProps | undefined>(
+  undefined
+)
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   children
@@ -39,7 +33,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         let found = false
         let txtFile: JSZip.JSZipObject | undefined
 
-        zip.forEach((relativePath, zipEntry) => {
+        zip.forEach((_, zipEntry) => {
           if (!found && zipEntry.name.endsWith('.txt')) {
             txtFile = zipEntry
             found = true

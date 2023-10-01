@@ -1,11 +1,11 @@
 import { Box } from '@mui/material'
-import { useDataContext } from '../DataContext'
 import { COLORS } from '../utils/colors'
 import { DataContextProps } from '../utils/types'
 import ECGChart from './ECGChart'
 import InfoTooltip from './InfoTooltip'
 import Loader from './Loader'
 import StyledButton from './StyledButton'
+import { useDataContext } from '../hooks/useDataContext'
 
 export default function ECGWrapper() {
   const { data, currentPage, handlePrevPage, handleNextPage } =
