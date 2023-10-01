@@ -59,6 +59,11 @@ export default function ECGChart({ data }: { data: dataProps[] }) {
                 enabled: true
               },
               mode: 'xy'
+            },
+            pan: {
+              enabled: true,
+              mode: 'xy',
+              threshold: 100
             }
           }
         }
@@ -80,7 +85,7 @@ export default function ECGChart({ data }: { data: dataProps[] }) {
 
   return (
     <Box display="inline">
-      <Box>
+      <Box sx={{ cursor: 'all-scroll' }}>
         <canvas ref={canvasRef} width={900} height={500} />
       </Box>
       <StyledButton onClick={handleResetZoom}>Reset Zoom</StyledButton>
