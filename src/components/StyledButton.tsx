@@ -5,12 +5,13 @@ import { COLORS } from '../utils/colors'
 interface StyledButtonProps {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   children: ReactNode
+  disabled?: boolean
 }
 
 export default function StyledButton({
   onClick,
   children,
-  props
+  disabled
 }: StyledButtonProps) {
   return (
     <Button
@@ -27,7 +28,7 @@ export default function StyledButton({
         }
       }}
       onClick={onClick}
-      {...props}
+      disabled={disabled}
     >
       {children}
     </Button>

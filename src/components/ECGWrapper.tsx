@@ -14,7 +14,7 @@ export default function ECG() {
           <ECGChart data={data} />
         </div>
         <Box sx={{ mt: '2px', mr: '4px', float: 'right' }}>
-          <StyledButton onClick={handlePrevPage} disabled={currentPage === 1}>
+          <StyledButton onClick={handlePrevPage} disabled={true}>
             Move left
           </StyledButton>
           <StyledButton onClick={handleNextPage}>Move right</StyledButton>

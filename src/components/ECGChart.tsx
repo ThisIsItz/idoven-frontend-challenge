@@ -1,10 +1,11 @@
 import { Chart } from 'chart.js/auto'
 import { useEffect, useRef } from 'react'
 import { COLORS } from '../utils/colors'
-import { Box, Button } from '@mui/material'
+import { Box } from '@mui/material'
 import StyledButton from './StyledButton'
+import { dataProps } from '../utils/types'
 
-export default function ECGChart({ data }) {
+export default function ECGChart({ data }: { data: dataProps[] }) {
   const canvasRef = useRef()
   const chartRef = useRef()
 
@@ -46,7 +47,7 @@ export default function ECGChart({ data }) {
         },
         plugins: {
           legend: {
-            display: false // Hide the legend
+            display: false
           },
           zoom: {
             zoom: {
@@ -82,9 +83,7 @@ export default function ECGChart({ data }) {
       <Box>
         <canvas ref={canvasRef} width={900} height={500} />
       </Box>
-      <StyledButton sx={{ color: 'yellow' }} onClick={handleResetZoom}>
-        Reset Zoom
-      </StyledButton>
+      <StyledButton onClick={handleResetZoom}>Reset Zoom</StyledButton>
     </Box>
   )
 }
