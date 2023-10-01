@@ -4,6 +4,7 @@ import ECGChart from './ECGChart'
 import Loader from './Loader'
 import StyledButton from './StyledButton'
 import InfoTooltip from './InfoTooltip'
+import { COLORS } from '../utils/colors'
 
 export default function ECG() {
   const { data, currentPage, handlePrevPage, handleNextPage } = useDataContext()
@@ -11,7 +12,17 @@ export default function ECG() {
   if (data.length > 1) {
     return (
       <Box>
-        <InfoTooltip title="To zoom in and out, simply use your mouse's scroll wheel. To move around the ECG, just click and drag" />
+        <Box
+          sx={{
+            cursor: 'help',
+            display: 'flex',
+            justifyContent: 'end',
+            mr: '10px',
+            color: COLORS.darkBlue
+          }}
+        >
+          <InfoTooltip title="To zoom in and out, simply use your mouse's scroll wheel. To move around the ECG, just click and drag" />
+        </Box>
         <Box>
           <ECGChart data={data} />
         </Box>
