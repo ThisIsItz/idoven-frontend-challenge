@@ -6,7 +6,7 @@ export interface DataProps {
 export interface DataContextProps {
   data: DataProps[]
   currentPage: number
-  itemsPerPage: number
+  isLoadingMoreData: boolean
   handlePrevPage: () => void
   handleNextPage: () => void
 }

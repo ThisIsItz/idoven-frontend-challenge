@@ -8,11 +8,28 @@ import StyledButton from './StyledButton'
 import { useDataContext } from '../hooks/useDataContext'
 
 export default function ECGWrapper() {
-  const { data, currentPage, handlePrevPage, handleNextPage } =
-    useDataContext() as DataContextProps
+  const {
+    data,
+    currentPage,
+    isLoadingMoreData,
+    handlePrevPage,
+    handleNextPage
+  } = useDataContext() as DataContextProps
 
   const isDataAvailable = data.length > 1
 
+  if (isLoadingMoreData || !isDataAvailable) {
+    return (
+      <Box
+        position="absolute"
+        top="50%"
+        left="50%"
+        sx={{ transform: 'translate(-50%, -50%)' }}
+      >
+        <Loader text="Please wait, we are loading your data..." />
+      </Box>
+    )
+  }
   if (isDataAvailable) {
     return (
       <Box>
@@ -32,21 +49,11 @@ export default function ECGWrapper() {
         </Box>
         <Box sx={{ mt: '2px', mr: '4px', float: 'right' }}>
           <StyledButton onClick={handlePrevPage} disabled={currentPage === 1}>
-            Move left
+            Load previous data
           </StyledButton>
-          <StyledButton onClick={handleNextPage}>Move right</StyledButton>
+          <StyledButton onClick={handleNextPage}>Load more data</StyledButton>
         </Box>
       </Box>
     )
   }
-  return (
-    <Box
-      position="absolute"
-      top="50%"
-      left="50%"
-      sx={{ transform: 'translate(-50%, -50%)' }}
-    >
-      <Loader text="Please wait, we are loading your data..." />
-    </Box>
-  )
 }

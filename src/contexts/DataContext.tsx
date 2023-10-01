@@ -1,5 +1,5 @@
 import JSZip from 'jszip'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { DataContextProps, DataProps } from '../utils/types'
 
 export const DataContext = createContext<DataContextProps | undefined>(
@@ -11,9 +11,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [data, setData] = useState<DataProps[]>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [itemsPerPage] = useState<number>(30000)
+  const [itemsPerPage] = useState<number>(10000)
+  const [isLoadingMoreData, setIsLoadingMoreData] = useState(false)
 
   const handleNextPage = () => {
+    setIsLoadingMoreData(true)
     setCurrentPage((prevPage) => prevPage + 1)
   }
 
@@ -69,8 +71,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
             }
           }
 
-          const lines = content.split('\n').slice(0, currentPage * itemsPerPage)
-          const parsedData = lines.map((line) => {
+          const startLine = (currentPage - 1) * itemsPerPage
+          const endLine = currentPage * itemsPerPage
+          const linesToDisplay = content.split('\n').slice(startLine, endLine)
+
+          const parsedData = linesToDisplay.map((line) => {
             const values = line.split(',')
             return {
               time: values[0],
@@ -83,19 +88,23 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         }
       } catch (error) {
         console.error('Error loading the ZIP file:', error)
+      } finally {
+        setIsLoadingMoreData(false)
       }
     }
 
     fetchData()
   }, [currentPage, itemsPerPage])
 
-  const contextValue: DataContextProps = {
-    data,
-    currentPage,
-    itemsPerPage,
-    handleNextPage,
-    handlePrevPage
-  }
+  const contextValue: DataContextProps = useMemo(() => {
+    return {
+      data,
+      currentPage,
+      isLoadingMoreData,
+      handleNextPage,
+      handlePrevPage
+    }
+  }, [data, currentPage, isLoadingMoreData])
 
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
