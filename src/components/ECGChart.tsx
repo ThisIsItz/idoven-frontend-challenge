@@ -1,9 +1,9 @@
+import { Box } from '@mui/material'
 import { Chart } from 'chart.js/auto'
 import { useEffect, useRef } from 'react'
 import { COLORS } from '../utils/colors'
-import { Box } from '@mui/material'
-import StyledButton from './StyledButton'
 import { dataProps } from '../utils/types'
+import StyledButton from './StyledButton'
 
 export default function ECGChart({ data }: { data: dataProps[] }) {
   const canvasRef = useRef()

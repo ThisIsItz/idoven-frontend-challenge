@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material'
+import { Box } from '@mui/material'
 import { useDataContext } from '../DataContext'
 import ECGChart from './ECGChart'
 import Loader from './Loader'
@@ -9,17 +9,17 @@ export default function ECG() {
 
   if (data.length > 1) {
     return (
-      <div>
-        <div>
+      <Box>
+        <Box>
           <ECGChart data={data} />
-        </div>
+        </Box>
         <Box sx={{ mt: '2px', mr: '4px', float: 'right' }}>
           <StyledButton onClick={handlePrevPage} disabled={true}>
             Move left
           </StyledButton>
           <StyledButton onClick={handleNextPage}>Move right</StyledButton>
         </Box>
-      </div>
+      </Box>
     )
   }
 
