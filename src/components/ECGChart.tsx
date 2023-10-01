@@ -92,7 +92,7 @@ export default function ECGChart({ data }: ECGChartProps) {
   }
 
   return (
-    <Box display="inline">
+    <Box display="inline" data-testid="ecg-chart">
       <Box sx={{ cursor: 'all-scroll' }}>
         <canvas ref={canvasRef} width={900} height={500} />
       </Box>
