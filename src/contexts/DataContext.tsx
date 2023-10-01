@@ -11,9 +11,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [data, setData] = useState<DataProps[]>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [itemsPerPage] = useState<number>(30000)
+  const [itemsPerPage] = useState<number>(10000)
+  const [isLoadingMoreData, setIsLoadingMoreData] = useState(false)
 
   const handleNextPage = () => {
+    setIsLoadingMoreData(true)
     setCurrentPage((prevPage) => prevPage + 1)
   }
 
@@ -86,6 +88,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         }
       } catch (error) {
         console.error('Error loading the ZIP file:', error)
+      } finally {
+        setIsLoadingMoreData(false)
       }
     }
 
@@ -96,11 +100,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
     return {
       data,
       currentPage,
-      itemsPerPage,
+      isLoadingMoreData,
       handleNextPage,
       handlePrevPage
     }
-  }, [data, currentPage, itemsPerPage])
+  }, [data, currentPage, isLoadingMoreData])
 
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
