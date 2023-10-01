@@ -69,8 +69,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
             }
           }
 
-          const lines = content.split('\n').slice(0, currentPage * itemsPerPage)
-          const parsedData = lines.map((line) => {
+          const startLine = (currentPage - 1) * itemsPerPage
+          const endLine = currentPage * itemsPerPage
+          const linesToDisplay = content.split('\n').slice(startLine, endLine)
+
+          const parsedData = linesToDisplay.map((line) => {
             const values = line.split(',')
             return {
               time: values[0],
