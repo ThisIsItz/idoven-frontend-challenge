@@ -1,5 +1,5 @@
 import JSZip from 'jszip'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { DataContextProps, DataProps } from '../utils/types'
 
 export const DataContext = createContext<DataContextProps | undefined>(
@@ -92,13 +92,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
     fetchData()
   }, [currentPage, itemsPerPage])
 
-  const contextValue: DataContextProps = {
-    data,
-    currentPage,
-    itemsPerPage,
-    handleNextPage,
-    handlePrevPage
-  }
+  const contextValue: DataContextProps = useMemo(() => {
+    return {
+      data,
+      currentPage,
+      itemsPerPage,
+      handleNextPage,
+      handlePrevPage
+    }
+  }, [data, currentPage, itemsPerPage])
 
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
