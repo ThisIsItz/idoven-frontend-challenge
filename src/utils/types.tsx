@@ -1,12 +1,11 @@
 export interface DataProps {
-  time: string
-  value: string
+  time: number
+  value: number
 }
 
 export interface DataContextProps {
   data: DataProps[]
-  currentPage: number
-  itemsPerPage: number
-  handlePrevPage: () => void
   handleNextPage: () => void
 }
+
+export type ReaderType = ReadableStreamDefaultReader<Uint8Array> | undefined
