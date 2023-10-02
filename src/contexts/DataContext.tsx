@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { DataContextProps, DataProps } from '../utils/types'
-import { getReader, getDataFile, getData } from '../utils/file'
+import { getReader, getDataFile, getParsedData } from '../utils/dataUtils'
+import { Stream } from 'stream'
 
 export const DataContext = createContext<DataContextProps | undefined>(
   undefined
@@ -10,13 +11,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
   const [data, setData] = useState<DataProps[]>([])
-  const [reader, setReader] = useState<any>(null)
-  const [isLoading, setIsLoading] = useState<any>(false)
+  const [reader, setReader] = useState<Stream | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const lazyGetReader = async () => {
     if (!reader) {
       const textFile = await getDataFile()
-      const fileReader = getReader(textFile)
+      const fileReader = await getReader(textFile)
       setReader(fileReader)
       return fileReader
     }
@@ -28,8 +29,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(true)
       const fileReader = await lazyGetReader()
 
-      const heartData = await getData(fileReader)
-      setData(heartData)
+      const parsedData = await getParsedData(fileReader)
+      setData(parsedData)
     } catch (error) {
       console.error('Error loading the ZIP file:', error)
     } finally {

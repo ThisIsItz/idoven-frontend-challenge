@@ -31,7 +31,7 @@ export const getDataFile = async () => {
   return zip.file('14-29-05_data_data.txt')
 }
 
-export const getData = async (fileReader) => {
+export const getParsedData = async (fileReader) => {
   const linesToDisplay = await readLines(fileReader, 10000)
 
   return linesToDisplay.map((line) => {
