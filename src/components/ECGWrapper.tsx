@@ -8,7 +8,7 @@ import StyledButton from './StyledButton'
 import { useDataContext } from '../contexts/useDataContext'
 import { useEffect, useState } from 'react'
 import { NUMBER_OF_DATA } from '../utils/constants'
-import { getDataRange } from '../utils/functions'
+import { getDataRange } from '../utils/getDataRange'
 
 export default function ECGWrapper() {
   const { data, handleNextPage } = useDataContext() as DataContextProps
