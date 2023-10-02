@@ -16,8 +16,6 @@ describe('ECGWrapper component', () => {
   beforeEach(() => {
     mockUseDataContext.mockReturnValue({
       data: [],
-      currentPage: 1,
-      handlePrevPage: jest.fn(),
       handleNextPage: jest.fn()
     })
   })
@@ -25,12 +23,10 @@ describe('ECGWrapper component', () => {
   test('renders ECGChart when data is available', () => {
     mockUseDataContext.mockReturnValueOnce({
       data: [
-        { time: '0', value: '1' },
-        { time: '2', value: '3' },
-        { time: '3', value: '3' }
+        { time: 0, value: 1 },
+        { time: 2, value: 3 },
+        { time: 3, value: 3 }
       ],
-      currentPage: 1,
-      handlePrevPage: jest.fn(),
       handleNextPage: jest.fn()
     })
 
@@ -39,8 +35,8 @@ describe('ECGWrapper component', () => {
     const ecgChart = screen.getByTestId('ecg-chart')
     expect(ecgChart).toBeInTheDocument()
 
-    const moveLeftButton = screen.getByText('Move left')
-    const moveRightButton = screen.getByText('Move right')
+    const moveLeftButton = screen.getByText('Load previous data')
+    const moveRightButton = screen.getByText('Load more data')
     expect(moveLeftButton).toBeInTheDocument()
     expect(moveRightButton).toBeInTheDocument()
   })
