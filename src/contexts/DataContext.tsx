@@ -1,5 +1,10 @@
-import React, { createContext, useEffect, useState } from 'react'
-import { getDataFile, getParsedData, getReader } from '../utils/dataUtils'
+import React, { createContext, useState } from 'react'
+import {
+  HeartData,
+  getDataFile,
+  getParsedData,
+  getReader
+} from '../utils/dataUtils'
 import { DataContextProps, DataProps } from '../utils/types'
 
 export const DataContext = createContext<DataContextProps | undefined>(
@@ -13,31 +18,27 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [reader, setReader] = useState<
     ReadableStreamDefaultReader<Uint8Array> | undefined
   >(undefined)
+  const [inHeartData, setInHeartData] = useState<any>(0)
 
-  const lazyGetReader = async () => {
-    if (!reader) {
-      const textFile = await getDataFile()
-      const fileReader = await getReader(textFile)
-      setReader(fileReader)
-      return fileReader
+  const lazyHeartData = async () => {
+    if (!inHeartData) {
+      const heartData = new HeartData('/data/idoven-data.zip')
+      await heartData.loadData()
+      setInHeartData(heartData)
+      return heartData
     }
-    return reader
+    return inHeartData
   }
 
   const loadNextValues = async () => {
     try {
-      const fileReader = await lazyGetReader()
-
-      const parsedData = await getParsedData(fileReader)
-      setData(parsedData)
+      const heartData = await lazyHeartData()
+      const parsedData = await heartData.getParsedData()
+      setData([...data, ...parsedData])
     } catch (error) {
       console.error('Error loading the ZIP file:', error)
     }
   }
-
-  useEffect(() => {
-    loadNextValues()
-  }, [])
 
   const handleNextPage = loadNextValues
 

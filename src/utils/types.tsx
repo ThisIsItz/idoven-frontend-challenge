@@ -5,6 +5,5 @@ export interface DataProps {
 
 export interface DataContextProps {
   data: DataProps[]
-  handlePrevPage: () => void
   handleNextPage: () => void
 }
