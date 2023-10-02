@@ -6,10 +6,10 @@ import { DataProps } from '../utils/types'
 import StyledButton from './StyledButton'
 
 interface ECGChartProps {
-  data: DataProps[]
+  trimmedData: DataProps[]
 }
 
-export default function ECGChart({ data }: ECGChartProps) {
+export default function ECGChart({ trimmedData }: ECGChartProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const chartRef = useRef<Chart | null>(null)
 
@@ -18,9 +18,8 @@ export default function ECGChart({ data }: ECGChartProps) {
     const ctx = canvasRef.current.getContext('2d')
     if (!ctx) return
 
-    const trimmedData = data.slice(1)
-    const timeValues = trimmedData.map((d) => parseFloat(d.time))
-    const ecgValues = trimmedData.map((d) => parseFloat(d.value))
+    const timeValues = trimmedData.map((d) => d.time)
+    const ecgValues = trimmedData.map((d) => d.value)
 
     const chartConfig = {
       type: 'line',
@@ -83,7 +82,7 @@ export default function ECGChart({ data }: ECGChartProps) {
         chartRef.current.destroy()
       }
     }
-  }, [data])
+  }, [trimmedData])
 
   const handleResetZoom = () => {
     if (chartRef.current) {
