@@ -1,6 +1,10 @@
 import JSZip from 'jszip'
 
-export const readLines = async (reader, numberOfLines) => {
+export const readLines = async (
+  reader: ReadableStreamDefaultReader<Uint8Array> | undefined,
+  numberOfLines: number
+) => {
+  if (!reader) return
   const { done, value } = await reader.read()
   console.log('done', done)
 
@@ -10,7 +14,7 @@ export const readLines = async (reader, numberOfLines) => {
   return lines.slice(0, numberOfLines)
 }
 
-export const getReader = async (textFile) => {
+export const getReader = async (textFile: JSZip.JSZipObject | null) => {
   if (!textFile) {
     console.error('No text file was found in the ZIP.')
     return
@@ -31,10 +35,12 @@ export const getDataFile = async () => {
   return zip.file('14-29-05_data_data.txt')
 }
 
-export const getParsedData = async (fileReader) => {
+export const getParsedData = async (
+  fileReader: ReadableStreamDefaultReader<Uint8Array> | undefined
+) => {
   const linesToDisplay = await readLines(fileReader, 10000)
 
-  return linesToDisplay.map((line) => {
+  return linesToDisplay!.map((line) => {
     const values = line.split(',')
     return {
       time: parseFloat(values[0]),

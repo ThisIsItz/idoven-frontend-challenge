@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
+import { getDataFile, getParsedData, getReader } from '../utils/dataUtils'
 import { DataContextProps, DataProps } from '../utils/types'
-import { getReader, getDataFile, getParsedData } from '../utils/dataUtils'
-import { Stream } from 'stream'
 
 export const DataContext = createContext<DataContextProps | undefined>(
   undefined
@@ -11,7 +10,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
   const [data, setData] = useState<DataProps[]>([])
-  const [reader, setReader] = useState<Stream | null>(null)
+  const [reader, setReader] = useState<
+    ReadableStreamDefaultReader<Uint8Array> | undefined
+  >(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const lazyGetReader = async () => {
