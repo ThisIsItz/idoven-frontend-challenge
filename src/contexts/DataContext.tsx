@@ -10,18 +10,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
   const [data, setData] = useState<DataProps[]>([])
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [itemsPerPage] = useState<number>(10000)
-  const [isLoadingMoreData, setIsLoadingMoreData] = useState(false)
+  const [linesToAdd, setLinesToAdd] = useState<number>(30000)
 
-  const handleNextPage = () => {
-    setIsLoadingMoreData(true)
-    setCurrentPage((prevPage) => prevPage + 1)
-  }
-
-  const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
-  }
+  console.log('data.length', data.length)
+  console.log('linesToAdd', linesToAdd)
 
   useEffect(() => {
     async function fetchData() {
@@ -32,47 +24,28 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         const zip = new JSZip()
         await zip.loadAsync(blob)
 
-        let found = false
-        let txtFile: JSZip.JSZipObject | undefined
-
-        zip.forEach((_, zipEntry) => {
-          if (!found && zipEntry.name.endsWith('.txt')) {
-            txtFile = zipEntry
-            found = true
-          }
-        })
+        const txtFile = zip.file('14-29-05_data_data.txt')
 
         if (txtFile) {
           const contentBlob = await txtFile.async('blob')
           const contentStream = contentBlob.stream()
-          let content = ''
-          let lineCount = 0
-
           const reader = contentStream.getReader()
+          let lineCount = 0
+          let content = ''
 
-          let done = false
+          while (lineCount < linesToAdd) {
+            const { done, value } = await reader.read()
 
-          while (!done) {
-            const { done: isDone, value } = await reader.read()
+            if (done) break
 
-            if (isDone) {
-              done = true
-            } else {
-              content += new TextDecoder().decode(value)
+            content += new TextDecoder().decode(value)
+            const lines = content.split('\n')
+            lineCount = lines.length - 1
 
-              if (content.includes('\n')) {
-                const lines = content.split('\n')
-                lineCount += lines.length - 1
-
-                if (lineCount >= currentPage * itemsPerPage) {
-                  done = true
-                }
-              }
-            }
+            if (lineCount >= linesToAdd) break
           }
-
-          const startLine = (currentPage - 1) * itemsPerPage
-          const endLine = currentPage * itemsPerPage
+          const startLine = 0
+          const endLine = linesToAdd
           const linesToDisplay = content.split('\n').slice(startLine, endLine)
 
           const parsedData = linesToDisplay.map((line) => {
@@ -82,29 +55,26 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
               value: values[1]
             }
           })
-          setData(parsedData)
+          setData((prevData) => [...prevData, ...parsedData])
         } else {
           console.error('No text file was found in the ZIP.')
         }
       } catch (error) {
         console.error('Error loading the ZIP file:', error)
-      } finally {
-        setIsLoadingMoreData(false)
       }
     }
 
     fetchData()
-  }, [currentPage, itemsPerPage])
+  }, [linesToAdd])
 
-  const contextValue: DataContextProps = useMemo(() => {
-    return {
-      data,
-      currentPage,
-      isLoadingMoreData,
-      handleNextPage,
-      handlePrevPage
-    }
-  }, [data, currentPage, isLoadingMoreData])
+  const handleNextPage = () => {
+    setLinesToAdd((prevLines) => prevLines + 10000)
+  }
+
+  const contextValue: DataContextProps = {
+    data,
+    handleNextPage
+  }
 
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
