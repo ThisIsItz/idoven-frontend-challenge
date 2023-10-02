@@ -18,8 +18,8 @@ export default function ECGChart({ trimmedData }: ECGChartProps) {
     const ctx = canvasRef.current.getContext('2d')
     if (!ctx) return
 
-    const timeValues = trimmedData.map((d) => parseFloat(d.time))
-    const ecgValues = trimmedData.map((d) => parseFloat(d.value))
+    const timeValues = trimmedData.map((d) => d.time)
+    const ecgValues = trimmedData.map((d) => d.value)
 
     const chartConfig = {
       type: 'line',
