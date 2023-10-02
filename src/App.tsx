@@ -5,7 +5,6 @@ import { Box } from '@mui/material'
 import ZoomPlugin from 'chartjs-plugin-zoom'
 import { Chart } from 'chart.js'
 
-// Register the zoom plugin
 Chart.register(ZoomPlugin)
 
 function App() {
