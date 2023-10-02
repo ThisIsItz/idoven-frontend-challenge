@@ -13,7 +13,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [reader, setReader] = useState<
     ReadableStreamDefaultReader<Uint8Array> | undefined
   >(undefined)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const lazyGetReader = async () => {
     if (!reader) {
@@ -27,22 +26,17 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const loadNextValues = async () => {
     try {
-      setIsLoading(true)
       const fileReader = await lazyGetReader()
 
       const parsedData = await getParsedData(fileReader)
       setData(parsedData)
     } catch (error) {
       console.error('Error loading the ZIP file:', error)
-    } finally {
-      setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    if (!isLoading) {
-      loadNextValues()
-    }
+    loadNextValues()
   }, [])
 
   const handleNextPage = loadNextValues
