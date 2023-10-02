@@ -1,30 +1,65 @@
-# React + TypeScript + Vite
+# ECG Frontend Challenge for Idoven.ai
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project aims to visualize an Electrocardiogram (ECG) in a graphical interface, using data stored in the `data` directory. The primary challenge was to create a user-friendly display for a long ECG recording, enabling users to navigate both backward and forward, zoom in and out, and select specific areas for zooming.
 
-Currently, two official plugins are available:
+## Summary
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project represents the completion of a coding challenge for Idoven, where the objective was to develop a web application for visualizing an Electrocardiogram (ECG) from a data file. The main features of the project include:
 
-## Expanding the ESLint configuration
+- Reading and processing an ECG signal from a file in the `data` directory.
+- Displaying the ECG signal in a user-friendly graphical interface.
+- Allowing users to navigate the signal backward and forward.
+- Enabling zoom in and out functionality, with the ability to select specific areas for zooming.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To achieve these goals, the following technologies and libraries were utilized:
 
-- Configure the top-level `parserOptions` property like this:
+- [React](https://reactjs.org/): The project is built using React for creating the user interface.
+- [TypeScript](https://www.typescriptlang.org/): TypeScript was used to add static types to JavaScript, improving code safety and efficiency.
+- [Vite](https://vitejs.dev/): Vite was employed as the development environment for a faster development experience.
+- [Material-UI](https://material-ui.com/): Material-UI was used for styling the application and providing a modern look.
+- [Chart.js](https://www.chartjs.org/): Chart.js was used for the visual representation of the ECG signal, offering flexibility and interactivity.
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/): Unit tests were written using React Testing Library and Jest to ensure the correctness and reliability of the application's codebase.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+I invite you to explore the codebase and assess my skills in frontend development. If you have any questions or need further information, please don't hesitate to reach out.
+
+## Getting Started
+
+To run this project, follow these steps:
+
+1. Clone the repository to your local machine:
+
+   ```shell
+   git clone <repository_url>
+
+   ```
+
+2. Navigate to the project directory:
+
+   ```shell
+   cd ecg-frontend-challenge
+
+   ```
+
+3. Install project dependencies using npm:
+
+   ```shell
+   npm install
+   ```
+
+## Running the Project
+
+To start the project and view the ECG visualization, use the following command:
+
+```shell
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# idoven-frontend-challenge
-# idoven-frontend-challenge
-# idoven-frontend-challenge
+The application should now be running locally and accessible in your web browser at http://localhost:5173.
+
+## Running Tests
+
+To execute the unit tests for this project, you can use the following command:
+
+```bash
+npm test
+```
