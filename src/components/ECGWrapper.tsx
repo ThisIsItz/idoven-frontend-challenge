@@ -45,6 +45,7 @@ export default function ECGWrapper() {
       top="50%"
       left="50%"
       sx={{ transform: 'translate(-50%, -50%)' }}
+      data-testid="ecg-wrapper-loading"
     >
       <Loader text="Please wait, we are loading your data..." />
     </Box>
