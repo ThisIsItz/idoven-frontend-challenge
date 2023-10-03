@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
 import { Chart } from 'chart.js/auto'
 import { useEffect, useRef } from 'react'
-import { COLORS } from '../utils/colors'
-import { DataProps } from '../utils/types'
-import StyledButton from './StyledButton'
+import { COLORS } from '../../utils/colors'
+import { DataProps } from '../../utils/types'
+import StyledButton from '../StyledButton/StyledButton'
 
 interface ECGChartProps {
   trimmedData: DataProps[]

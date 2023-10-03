@@ -1,14 +1,14 @@
 import { Box } from '@mui/material'
-import { COLORS } from '../utils/colors'
-import { DataContextProps, DataProps } from '../utils/types'
-import ECGChart from './ECGChart'
-import InfoTooltip from './InfoTooltip'
-import Loader from './Loader'
-import StyledButton from './StyledButton'
-import { useDataContext } from '../contexts/useDataContext'
+import { COLORS } from '../../utils/colors'
+import { DataContextProps, DataProps } from '../../utils/types'
+import ECGChart from '../ECGChart/ECGChart'
+import InfoTooltip from '../InfoTooltip/InfoTooltip'
+import Loader from '../Loader/Loader'
+import StyledButton from '../StyledButton/StyledButton'
+import { useDataContext } from '../../contexts/useDataContext'
 import { useEffect, useState } from 'react'
-import { NUMBER_OF_DATA } from '../utils/constants'
-import { getDataRange } from '../utils/getDataRange'
+import { NUMBER_OF_DATA } from '../../utils/constants'
+import { getDataRange } from '../../utils/getDataRange/getDataRange'
 
 export default function ECGWrapper() {
   const { data, handleNextPage } = useDataContext() as DataContextProps

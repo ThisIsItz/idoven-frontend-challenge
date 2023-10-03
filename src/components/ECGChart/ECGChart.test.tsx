@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import ECGChart from '../components/ECGChart'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
+import ECGChart from './ECGChart'
 
 jest.mock('chart.js/auto', () => ({
   Chart: jest.fn()

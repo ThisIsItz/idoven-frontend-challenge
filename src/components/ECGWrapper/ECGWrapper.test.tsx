@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import ECGWrapper from '../components/ECGWrapper'
-import { DataContextProps } from '../utils/types'
-import { useDataContext } from '../contexts/useDataContext'
+import ECGWrapper from './ECGWrapper'
+import { DataContextProps } from '../../utils/types'
+import { useDataContext } from '../../contexts/useDataContext'
 
 jest.mock('../contexts/useDataContext', () => ({
   useDataContext: jest.fn()

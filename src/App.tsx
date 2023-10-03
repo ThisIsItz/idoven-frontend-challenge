@@ -1,6 +1,6 @@
 import './App.css'
-import Header from './components/Header'
-import ECGWrapper from './components/ECGWrapper'
+import Header from './components/Header/Header'
+import ECGWrapper from './components/ECGWrapper/ECGWrapper'
 import { Box } from '@mui/material'
 import ZoomPlugin from 'chartjs-plugin-zoom'
 import { Chart } from 'chart.js'

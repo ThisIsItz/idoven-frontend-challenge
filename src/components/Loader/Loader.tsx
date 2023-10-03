@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from '@mui/material'
-import { COLORS } from '../utils/colors'
+import { COLORS } from '../../utils/colors'
 
 interface LoaderProps {
   text?: string

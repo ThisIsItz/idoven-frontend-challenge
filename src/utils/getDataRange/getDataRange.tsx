@@ -1,4 +1,4 @@
-import { NUMBER_OF_DATA } from './constants'
+import { NUMBER_OF_DATA } from '../constants'
 
 export const getDataRange = (currentPage: number = 1) => {
   let start, end

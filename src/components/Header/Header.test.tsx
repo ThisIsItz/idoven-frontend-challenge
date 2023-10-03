@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import Header from '../components/Header'
+import Header from './Header'
 
 test('Header loads and displays text', async () => {
   render(<Header />)

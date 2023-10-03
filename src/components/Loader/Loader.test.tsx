@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import Loader from '../components/Loader'
+import Loader from './Loader'
 
 describe('Loader component', () => {
   test('renders without text', () => {
