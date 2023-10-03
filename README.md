@@ -22,6 +22,8 @@ To achieve these goals, the following technologies and libraries were utilized:
 
 I invite you to explore the codebase and assess my skills in frontend development. If you have any questions or need further information, please don't hesitate to reach out.
 
+![ECG chart](./public/ecg-chart.png)
+
 ## Getting Started
 
 To run this project, follow these steps:
@@ -69,6 +71,8 @@ To interact with the ECG graph:
 - To zoom in and out, simply use your mouse's scroll wheel.
 - To move around the ECG, click and drag the graph.
 - To navigate backward and forward in the ECG data, click the respective buttons below to view more data or previous data.
+
+![Zoom functionality](./public/ecg-chart-zoomed.png)
 
 ## Running Tests
 
