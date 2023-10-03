@@ -73,6 +73,7 @@ To interact with the ECG graph:
 - To navigate backward and forward in the ECG data, click the respective buttons below to view more data or previous data.
 
 ![Zoom functionality](./public/ecg-chart-zoomed.png)
+Zoomed chart
 
 ## Running Tests
 
