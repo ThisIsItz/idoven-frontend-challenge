@@ -3,7 +3,7 @@ import { getDataFile, getParsedData, getReader } from '../../utils/dataUtils'
 import { DataProps } from '../../utils/types'
 import { DataContext, DataProvider } from './DataContext'
 
-const mockReader = {
+const mockedReader = {
   read: jest.fn(),
   releaseLock: jest.fn(),
   closed: Promise.resolve(undefined),
@@ -51,7 +51,7 @@ describe('DataContext and DataProvider', () => {
       mockedJSZipObject
     )
     ;(getReader as jest.MockedFunction<typeof getReader>).mockResolvedValue(
-      mockReader
+      mockedReader
     )
     ;(
       getParsedData as jest.MockedFunction<typeof getParsedData>
