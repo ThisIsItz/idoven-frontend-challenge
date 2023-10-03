@@ -46,6 +46,12 @@ To run this project, follow these steps:
    npm install
    ```
 
+4. Ensure you have Node.js version 18.18.0 installed. You can check your Node.js version using the following command:
+
+```shell
+  node -v
+```
+
 ## Running the Project
 
 To start the project and view the ECG visualization, use the following command:
@@ -55,6 +61,14 @@ npm run dev
 ```
 
 The application should now be running locally and accessible in your web browser at http://localhost:5173.
+
+## Interacting with the ECG
+
+To interact with the ECG graph:
+
+- To zoom in and out, simply use your mouse's scroll wheel.
+- To move around the ECG, click and drag the graph.
+- To navigate backward and forward in the ECG data, click the respective buttons below to view more data or previous data.
 
 ## Running Tests
 
