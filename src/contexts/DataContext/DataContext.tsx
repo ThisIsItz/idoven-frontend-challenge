@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react'
-import { getDataFile, getParsedData, getReader } from '../utils/dataUtils'
-import { DataContextProps, DataProps, ReaderType } from '../utils/types'
+import { getDataFile, getParsedData, getReader } from '../../utils/dataUtils'
+import { DataContextProps, DataProps, ReaderType } from '../../utils/types'
 
 export const DataContext = createContext<DataContextProps | undefined>(
   undefined

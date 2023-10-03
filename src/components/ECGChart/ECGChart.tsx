@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
 import { Chart } from 'chart.js/auto'
 import { useEffect, useRef } from 'react'
-import { COLORS } from '../utils/colors'
-import { DataProps } from '../utils/types'
-import StyledButton from './StyledButton'
+import { COLORS } from '../../utils/colors'
+import { DataProps } from '../../utils/types'
+import StyledButton from '../StyledButton/StyledButton'
 
 interface ECGChartProps {
   trimmedData: DataProps[]
@@ -78,22 +78,27 @@ export default function ECGChart({ trimmedData }: ECGChartProps) {
     chartRef.current = chart
 
     return () => {
-      if (chartRef.current) {
+      if (chartRef.current?.destroy) {
         chartRef.current.destroy()
       }
     }
   }, [trimmedData])
 
   const handleResetZoom = () => {
-    if (chartRef.current) {
+    if (chartRef.current?.resetZoom) {
       chartRef.current.resetZoom()
     }
   }
 
   return (
-    <Box display="inline">
+    <Box display="inline" data-testid="ecg-chart">
       <Box sx={{ cursor: 'all-scroll' }}>
-        <canvas ref={canvasRef} width={900} height={500} />
+        <canvas
+          data-testid="ecg-canvas"
+          ref={canvasRef}
+          width={900}
+          height={500}
+        />
       </Box>
       <StyledButton onClick={handleResetZoom}>Reset Zoom</StyledButton>
     </Box>

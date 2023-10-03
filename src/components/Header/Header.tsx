@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import { COLORS } from '../utils/colors'
+import { COLORS } from '../../utils/colors'
 
 export default function Header() {
   return (

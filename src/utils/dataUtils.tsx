@@ -1,9 +1,11 @@
 import JSZip from 'jszip'
-import { ReaderType } from './types'
+import { DataProps, ReaderType } from './types'
 
-export const getParsedData = async (reader: ReaderType) => {
+export const getParsedData = async (
+  reader: ReaderType
+): Promise<DataProps[]> => {
   const linesToDisplay = await readNextLines(reader)
-
+  console.log(linesToDisplay)
   return linesToDisplay!.map((line) => {
     const values = line.split(',')
     return {
@@ -34,7 +36,7 @@ export const getDataFile = async () => {
   return zip.file('14-29-05_data_data.txt')
 }
 
-async function readNextLines(reader: ReaderType) {
+export async function readNextLines(reader: ReaderType) {
   if (!reader) {
     console.error('reader not loaded!')
     return

@@ -5,15 +5,17 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'react-app',
+    'react-app/jest'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
-    "indent": ["error", 2],
+    indent: ['error', 2],
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true },
-    ],
-  },
+      { allowConstantExport: true }
+    ]
+  }
 }

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material'
 import { MouseEvent, ReactNode } from 'react'
-import { COLORS } from '../utils/colors'
+import { COLORS } from '../../utils/colors'
 
 interface StyledButtonProps {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
