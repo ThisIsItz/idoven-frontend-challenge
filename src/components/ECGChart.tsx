@@ -78,14 +78,14 @@ export default function ECGChart({ trimmedData }: ECGChartProps) {
     chartRef.current = chart
 
     return () => {
-      if (chartRef.current) {
+      if (chartRef.current?.destroy) {
         chartRef.current.destroy()
       }
     }
   }, [trimmedData])
 
   const handleResetZoom = () => {
-    if (chartRef.current) {
+    if (chartRef.current?.resetZoom) {
       chartRef.current.resetZoom()
     }
   }
@@ -93,7 +93,12 @@ export default function ECGChart({ trimmedData }: ECGChartProps) {
   return (
     <Box display="inline" data-testid="ecg-chart">
       <Box sx={{ cursor: 'all-scroll' }}>
-        <canvas ref={canvasRef} width={900} height={500} />
+        <canvas
+          data-testid="ecg-canvas"
+          ref={canvasRef}
+          width={900}
+          height={500}
+        />
       </Box>
       <StyledButton onClick={handleResetZoom}>Reset Zoom</StyledButton>
     </Box>
