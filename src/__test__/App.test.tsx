@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import App from '../App'
-import { DataProvider } from '../contexts/DataContext'
+import { DataProvider } from '../contexts/DataContext/DataContext'
 
 describe('App Component', () => {
   test('renders the App component with Header and ECGWrapper', () => {

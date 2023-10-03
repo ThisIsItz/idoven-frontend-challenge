@@ -1,5 +1,5 @@
-import ECGWrapper from '../components/ECGWrapper/ECGWrapper'
-import { DataContext } from './DataContext'
+import ECGWrapper from '../../components/ECGWrapper/ECGWrapper'
+import { DataContext } from '../DataContext/DataContext'
 import userEvent from '@testing-library/user-event'
 import { render, screen, waitFor } from '@testing-library/react'
 

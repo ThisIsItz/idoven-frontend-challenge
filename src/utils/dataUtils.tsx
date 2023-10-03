@@ -5,7 +5,7 @@ export const getParsedData = async (
   reader: ReaderType
 ): Promise<DataProps[]> => {
   const linesToDisplay = await readNextLines(reader)
-
+  console.log(linesToDisplay)
   return linesToDisplay!.map((line) => {
     const values = line.split(',')
     return {

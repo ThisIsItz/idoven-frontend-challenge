@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { DataContextProps } from '../utils/types'
-import { DataContext } from './DataContext'
+import { DataContextProps } from '../../utils/types'
+import { DataContext } from '../DataContext/DataContext'
 
 export const useDataContext = (): DataContextProps => {
   const context = useContext(DataContext)

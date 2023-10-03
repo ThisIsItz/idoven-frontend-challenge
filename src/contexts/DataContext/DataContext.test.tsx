@@ -10,7 +10,7 @@ const mockReader = {
   cancel: jest.fn()
 }
 
-jest.mock('../utils/dataUtils', () => ({
+jest.mock('../../utils/dataUtils', () => ({
   getDataFile: jest.fn(),
   getParsedData: jest.fn(),
   getReader: jest.fn()
