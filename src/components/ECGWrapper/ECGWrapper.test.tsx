@@ -4,7 +4,7 @@ import ECGWrapper from './ECGWrapper'
 import { DataContextProps } from '../../utils/types'
 import { useDataContext } from '../../contexts/useDataContext'
 
-jest.mock('../contexts/useDataContext', () => ({
+jest.mock('../../contexts/useDataContext', () => ({
   useDataContext: jest.fn()
 }))
 

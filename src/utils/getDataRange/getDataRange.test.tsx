@@ -1,5 +1,5 @@
-import { NUMBER_OF_DATA } from '../utils/constants'
-import { getDataRange } from '../utils/getDataRange/getDataRange'
+import { NUMBER_OF_DATA } from '../constants'
+import { getDataRange } from './getDataRange'
 
 describe('getDataRange', () => {
   it('calculates the data range correctly for the first page', () => {
