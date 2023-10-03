@@ -2,7 +2,7 @@ import { NUMBER_OF_DATA } from '../constants'
 import { getDataRange } from './getDataRange'
 
 describe('getDataRange', () => {
-  it('calculates the data range correctly for the first page', () => {
+  test('calculates the data range correctly for the first page', () => {
     const currentPage = 1
     const [start, end] = getDataRange(currentPage)
 
@@ -10,7 +10,7 @@ describe('getDataRange', () => {
     expect(end).toBe(1 * NUMBER_OF_DATA)
   })
 
-  it('calculates the data range correctly for a non-first page', () => {
+  test('calculates the data range correctly for a non-first page', () => {
     const currentPage = 3
     const [start, end] = getDataRange(currentPage)
 

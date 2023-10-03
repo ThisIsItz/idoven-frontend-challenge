@@ -3,7 +3,7 @@ import App from '../App'
 import { DataProvider } from '../contexts/DataContext'
 
 describe('App Component', () => {
-  it('renders the App component with Header and ECGWrapper', () => {
+  test('renders the App component with Header and ECGWrapper', () => {
     render(
       <DataProvider>
         <App />

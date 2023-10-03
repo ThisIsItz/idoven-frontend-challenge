@@ -15,7 +15,7 @@ describe('ECGChart', () => {
     { time: 2, value: 20 }
   ]
 
-  it('renders the ECG chart and reset button', () => {
+  test('renders the ECG chart and reset button', () => {
     render(<ECGChart trimmedData={trimmedData} />)
 
     const canvas = screen.getByTestId('ecg-canvas')
@@ -25,7 +25,7 @@ describe('ECGChart', () => {
     expect(resetButton).toBeInTheDocument()
   })
 
-  it('should do nothing if ref does not exist', () => {
+  test('should do nothing if ref does not exist', () => {
     const useRefSpy = jest
       .spyOn(React, 'useRef')
       .mockReturnValueOnce({ current: null })
